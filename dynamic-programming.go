@@ -2,17 +2,17 @@ package main
 
 import "fmt"
 
-type deneme struct {
+type wordstruct struct {
 	word      string
 	similarty int
 }
 
 func main() {
 	word := "talha"
-	comparestrings := []string{"talhaaaa", "alha", "adasdasdasd"}
+	comparestrings := []string{"asdasdads", "alha"}
 	var result int
 	var index int
-	var final = make([]deneme, len(comparestrings))
+	var final = make([]wordstruct, len(comparestrings))
 	for m := 0; m < len(comparestrings); m++ {
 		fmt.Printf("-----NEW GRİD-----\n")
 		compare := comparestrings[m]
@@ -42,18 +42,28 @@ func main() {
 			fmt.Printf("\n")
 		}
 		fmt.Println(result)
-		tmp := deneme{
+		tmp := wordstruct{
 			word:      compare,
 			similarty: result,
 		}
 		final[index] = tmp
 		index++
 	}
-	var biggest = final[0].similarty
+
+	var ordered = make([]wordstruct, len(final))
 	for i := 0; i < len(final); i++ {
-		if final[i].similarty > biggest {
-			biggest = final[i].similarty
+		var biggest = final[i].similarty
+		var biggestindex int
+		for j := 0; j < len(final); j++ {
+			if final[j].similarty > biggest {
+				biggest = final[j].similarty
+				biggestindex = j
+			}
 		}
-		fmt.Println(final[i])
+		ordered[i] = wordstruct{
+			word:      final[biggestindex].word,
+			similarty: final[biggestindex].similarty,
+		}
 	}
+	fmt.Println(ordered)
 }
