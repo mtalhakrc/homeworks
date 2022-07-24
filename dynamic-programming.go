@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type wordstruct struct {
 	word      string
@@ -9,7 +11,7 @@ type wordstruct struct {
 
 func main() {
 	word := "talha"
-	comparestrings := []string{"asdasdads", "alha"}
+	comparestrings := []string{"asdasdads", "alha", "lha", "talha"}
 	var result int
 	var index int
 	var final = make([]wordstruct, len(comparestrings))
@@ -49,21 +51,15 @@ func main() {
 		final[index] = tmp
 		index++
 	}
-
-	var ordered = make([]wordstruct, len(final))
 	for i := 0; i < len(final); i++ {
-		var biggest = final[i].similarty
-		var biggestindex int
-		for j := 0; j < len(final); j++ {
-			if final[j].similarty > biggest {
-				biggest = final[j].similarty
-				biggestindex = j
+		for j := i; j < len(final); j++ {
+			if final[j].similarty > final[i].similarty {
+				tmp := wordstruct{}
+				tmp = final[i]
+				final[i] = final[j]
+				final[j] = tmp
 			}
 		}
-		ordered[i] = wordstruct{
-			word:      final[biggestindex].word,
-			similarty: final[biggestindex].similarty,
-		}
 	}
-	fmt.Println(ordered)
+	fmt.Println(final)
 }
