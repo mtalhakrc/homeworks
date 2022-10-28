@@ -10,8 +10,8 @@ type wordstruct struct {
 }
 
 func main() {
-	word := "talha"
-	comparestrings := []string{"asdasdads", "alha", "lha", "talha"}
+	word := "vista"
+	comparestrings := []string{"wqdwqvistadqdqwd"}
 	var result int
 	var index int
 	var final = make([]wordstruct, len(comparestrings))
@@ -43,23 +43,23 @@ func main() {
 			}
 			fmt.Printf("\n")
 		}
-		fmt.Println(result)
 		tmp := wordstruct{
 			word:      compare,
 			similarty: result,
 		}
 		final[index] = tmp
 		index++
-	}
-	for i := 0; i < len(final); i++ {
-		for j := i; j < len(final); j++ {
-			if final[j].similarty > final[i].similarty {
-				tmp := wordstruct{}
-				tmp = final[i]
-				final[i] = final[j]
-				final[j] = tmp
+		fmt.Printf("\nsimilarity with order -> ")
+		for i := 0; i < len(final); i++ {
+			for j := i; j < len(final); j++ {
+				if final[j].similarty > final[i].similarty {
+					tmp := wordstruct{}
+					tmp = final[i]
+					final[i] = final[j]
+					final[j] = tmp
+				}
 			}
 		}
+		fmt.Println(final)
 	}
-	fmt.Println(final)
 }
